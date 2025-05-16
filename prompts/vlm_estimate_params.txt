@@ -1,0 +1,77 @@
+Please carefully analyze the provided image, identifying all major geometric objects, their properties, and the scene's lighting setup. Your task is to extract object and lighting information and return the result strictly following the JSON format specified below. The Camera and Ground Plane parameters are fixed and should be used as provided in the JSON structure. This JSON will be used by a Python script to reconstruct the scene in Blender.
+
+
+**Output Format Requirements:**
+
+
+Please output **only** a valid JSON object, without any additional explanations, comments, or code block markers (like ```json ... ```). The JSON object must adhere to the following structure:
+
+
+```json
+{
+  "camera": {
+    // --- CRITICAL: Use these FIXED values for the camera ---
+    "name": "MainCamera",
+    "location": [0.0, -10.0, 5.0],
+    "rotation_euler": [65.0, 0.0, 0.0], // Provided in degrees
+    "lens": 50.0,
+    "sensor_width": 36.0,
+    "sensor_height": 36.0,
+    "clip_start": 0.1,
+    "clip_end": 100.0
+    // --- Do NOT estimate camera parameters ---
+  },
+  "lighting": {
+    "sun_energy": float,             // Estimated sun light intensity (e.g., between 2.0 and 5.0)
+    "sun_rotation_euler_degrees": [float, float, float], // Estimated sun light rotation angles (degrees) [X, Y, Z]
+    "environment_color": [float, float, float, float], // Estimated environment light color [R, G, B, A] (e.g., [0.8, 0.8, 0.8, 1.0])
+    "environment_strength": float    // Estimated environment light strength (e.g., between 1.0 and 1.5)
+  },
+  "objects": [
+    {
+      "name": "descriptive_name_string", // Descriptive name, format like: "color size material shape" (e.g., "green large metal cylinder")
+      "location": [float, float, float], // Estimated object center position [X, Y, Z]
+      "rotation_euler": [float, float, float], // Estimated object Euler rotation angles (degrees) [X, Y, Z] (Often [0, 0, 0] for CLEVR)
+      "size_params": {
+        // --- CRITICAL: Include ONE of the following based on object shape ---
+        // "size": float                // If 'cube' (Estimated edge length)
+        // "radius": float, "depth": float // If 'cylinder' (Estimated base radius and height)
+        // "radius": float              // If 'sphere' (Estimated radius)
+      },
+      "material": {
+        "name": "MaterialNameString",    // Material name (e.g., "GreenMetal", "BlueRubber"), use the same name for identical materials
+        "base_color": [float, float, float, float],   // Extracted object color [R, G, B, A] (A is usually 1.0)
+        "metallic": float,               // Estimated metallic value (between 0.0 and 1.0)
+        "roughness": float              // Estimated roughness value (between 0.0 and 1.0)
+      }
+    }
+    // ... Potentially multiple object entries ...
+  ]
+}
+```
+
+
+**Analysis Guidelines and Notes (Updated):**
+
+
+1.  **Camera:** **Do not estimate camera parameters.** Use the exact fixed values provided in the `"camera"` section of the JSON template above (`location: [0.0, -10.0, 5.0]`, `rotation_euler: [65.0, 0.0, 0.0]`, etc.).
+2.  **Lighting:** Observe the shadow direction and intensity, highlights on object surfaces, and overall scene brightness to estimate the sun's energy, rotation, and the environment light's color and strength. Provide reasonable estimates.
+3.  **Objects:**
+    *   **Identification:** Find all clearly visible, primary geometric objects in the image.
+    *   **Naming (name):** Follow the "color size material shape" format, e.g., "blue large rubber cube", "gold small metal sphere". Size can be "small", "large", or other relative terms. Material can be "metal", "rubber", "matte", "shiny", etc. Shape should be "cube", "cylinder", or "sphere".
+    *   **Location (location):** Estimate the [X, Y, Z] coordinates for the center of each object. Assume the ground is at the Z=0 plane. The Z coordinate is often half the object's height (derived from size estimation). Estimate X and Y based on the object's left-right and front-back position in the image.
+    *   **Rotation (rotation_euler):** For CLEVR-style images, objects are usually upright, so the rotation is likely `[0.0, 0.0, 0.0]`. Please confirm this.
+    *   **Size Parameters (size_params):** This is crucial! Based on the identified object shape, provide the corresponding size parameters:
+        *   **Cube:** Provide `"size": float`, estimating the cube's edge length.
+        *   **Cylinder:** Provide `"radius": float` and `"depth": float`, estimating the cylinder's base radius and height, respectively.
+        *   **Sphere:** Provide `"radius": float`, estimating the sphere's radius.
+        Estimate these dimension values based on the object's visual size in the image (relative to other objects).
+    *   **Material (material):**
+        *   **Naming (name):** Generate a concise material name, e.g., "GreenMetal". If multiple objects clearly share the same material (like the two gold objects in the example), ensure they reference the **exact same** material name.
+        *   **Color (base_color):** Extract the object's base color and convert it to [R, G, B, A] format, where R, G, B values are between 0.0 and 1.0, and A is typically 1.0.
+        *   **Metallic (metallic):** Estimate based on whether the object looks like metal. Usually 1.0 for metals, 0.0 for non-metals.
+        *   **Roughness (roughness):** Estimate based on the object's surface shininess. Very smooth, mirror-like surfaces (like polished metal) have low roughness (near 0.0). Matte or dull surfaces (like rubber) have high roughness (near 1.0).
+
+
+Please ensure your output strictly conforms to the JSON structure above, using the fixed camera values and providing reasonable estimates for lighting and object parameters based on the image analysis.
+
