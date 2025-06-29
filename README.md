@@ -82,10 +82,10 @@ bash cal_metric.sh "/output/path" "/path/to/images" "GPI_ID"
 ```
 
 
-## 🎈 Acknowledgement
+# 🎈 Acknowledgement
 Thanks to the following fantastic repos: [SAM](https://github.com/facebookresearch/segment-anything), [vllm](https://github.com/vllm-project/vllm), [Clever dataset](https://github.com/facebookresearch/clevr-dataset-gen), [Blender](https://www.blender.org/).
 
-## 📒 Citation
+# 📒 Citation
 If you find our work helpful, please consider citing:
 ```bibtex
 @article{liu2025ir3d,
