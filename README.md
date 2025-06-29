@@ -27,7 +27,11 @@
 <br> <sup>1</sup>CUHK, <sup>2</sup>TJU, <sup>3</sup>EPFL, <sup>4</sup>HKUST, <sup>5</sup>XMU, <sup>6</sup>MIT
 
 
-Abstract: *Vision-language models (VLMs) excel at descriptive tasks, but whether they truly understand scenes from visual observations remains uncertain. We introduce IR3D-Bench, a benchmark challenging VLMs to demonstrate understanding through active creation rather than passive recognition. Grounded in the analysis-by-synthesis paradigm, IR3D-Bench tasks Vision-Language Agents (VLAs) with actively using programming and rendering tools to recreate the underlying 3D structure of an input image, achieving agentic inverse rendering through tool use. This ''understanding-by-creating'' approach probes the tool-using generative capacity of VLAs, moving beyond the descriptive or conversational capacity measured by traditional scene understanding benchmarks. We provide a comprehensive suite of metrics to evaluate geometric accuracy, spatial relations, appearance attributes, and overall plausibility. Initial experiments on agentic inverse rendering powered by various state-of-the-art VLMs highlight current limitations, particularly in visual precision rather than basic tool usage. IR3D-Bench, including data and evaluation protocols, is released to facilitate systematic study and development of tool-using VLAs towards genuine scene understanding by creating.*
+# 🌟 Highlight
+- **We propose *IR3D-Bench*, a benchmark that evaluates the spatial and scene understanding capabilities of Vision-Language Models (VLMs) via inverse rendering.**
+- **Our pipeline inputs an image and prompt, guiding the model to predict object-level parameters for reconstructing the scene.**
+- **We introduce a set of metrics to quantitatively assess the fidelity and realism of the reconstructed scenes and images.**
+- **Experiments show that while *Gemini 2.5 Pro* performs best among current VLMs, a notable gap remains from ground truth, which can be reduced through multi-round refinement.**
 
 # 🎨 Pipeline Overview
 <p align="center">
