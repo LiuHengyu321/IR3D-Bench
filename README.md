@@ -1,12 +1,38 @@
-# IR3D-Bench: Evaluating Vision-Language Model Scene Understanding as Agentic Inverse Rendering
+<h1 style="border: none; margin-bottom: 0;">
+  IR3D-Bench: Evaluating Vision-Language Model Scene Understanding as Agentic Inverse Rendering
+</h1>
 
+*"What I cannot create, I do not understand."*  <div align="right">*——Richard Feynman*</div>
 
+<hr>
 
+<a href=""><img src="https://img.shields.io/badge/Arxiv-XXXX.XXXX-B31B1B.svg"></a>
+<a href="https://ir3d-bench.github.io/"><img src="https://img.shields.io/badge/Project-Page-orange"></a>
+<a href="https://youtu.be/GRQ9ZjyP5tY"><img src="https://img.shields.io/badge/Video-Youtube-d61c1c.svg"></a>
+
+<p align="center">
+  <img src="assets/IR3D.png" alt="IR3D Logo" width="150"/>
+</p>
+
+> [**IR3D-Bench: Evaluating Vision-Language Model Scene Understanding as Agentic Inverse Rendering**]()<br>
+> [Parker Liu]()<sup>1,\*</sup>, [Chenxin Li](https://chenxinli001.github.io/)<sup>1,\*</sup>,
+[Zhengxin Li](https://github.com/Lizx123456)<sup>2</sup>,
+[Yipeng Wu](https://github.com/wind-bell999)<sup>2</sup>,
+[Wuyang Li](https://wymancv.github.io/wuyang.github.io/)<sup>3</sup>,
+[Zhiqin Yang](https://visitworld123.github.io/)<sup>1</sup>,
+[Zhenyuan Zhang](https://openreview.net/profile?id=~Zhenyuan_Zhang2)<sup>4</sup>,
+[Yunlong Lin](https://lyl1015.github.io/)<sup>5</sup>,
+[Sirui Han](https://facultyprofiles.hkust.edu.hk/profiles.php?profile=sirui-han-siruihan)<sup>4</sup>,
+[Brandon Y. Feng](https://brandonyfeng.github.io/)<sup>6</sup>,
+<br> <sup>1</sup>CUHK, <sup>2</sup>TJU, <sup>3</sup>EPFL, <sup>4</sup>HKUST, <sup>5</sup>XMU, <sup>6</sup>MIT
 
 
 Abstract: *Vision-language models (VLMs) excel at descriptive tasks, but whether they truly understand scenes from visual observations remains uncertain. We introduce IR3D-Bench, a benchmark challenging VLMs to demonstrate understanding through active creation rather than passive recognition. Grounded in the analysis-by-synthesis paradigm, IR3D-Bench tasks Vision-Language Agents (VLAs) with actively using programming and rendering tools to recreate the underlying 3D structure of an input image, achieving agentic inverse rendering through tool use. This ''understanding-by-creating'' approach probes the tool-using generative capacity of VLAs, moving beyond the descriptive or conversational capacity measured by traditional scene understanding benchmarks. We provide a comprehensive suite of metrics to evaluate geometric accuracy, spatial relations, appearance attributes, and overall plausibility. Initial experiments on agentic inverse rendering powered by various state-of-the-art VLMs highlight current limitations, particularly in visual precision rather than basic tool usage. IR3D-Bench, including data and evaluation protocols, is released to facilitate systematic study and development of tool-using VLAs towards genuine scene understanding by creating.*
 
-
+# Pipeline Overview
+<p align="center">
+  <img src="assets/main_pipeline.png" alt="Pipeline"/>
+</p>
 
 
 # Environment setup
@@ -57,8 +83,15 @@ bash cal_metric.sh "/output/path" "/path/to/images" "GPI_ID"
 
 
 ## Acknowledgement
-Thanks to the following fantastic repos:
-- [SAM](https://github.com/facebookresearch/segment-anything)
-- [vllm](https://github.com/vllm-project/vllm)
-- [Clever dataset](https://github.com/facebookresearch/clevr-dataset-gen)
-- [Blender](https://www.blender.org/)
+Thanks to the following fantastic repos: [SAM](https://github.com/facebookresearch/segment-anything), [vllm](https://github.com/vllm-project/vllm), [Clever dataset](https://github.com/facebookresearch/clevr-dataset-gen), [Blender](https://www.blender.org/).
+
+## 📚 Citation
+If you find our work helpful, please consider citing:
+```bibtex
+@article{liu2025ir3d,
+  title={IR3D-Bench: Evaluating Vision-Language Model Scene Understanding as Agentic Inverse Rendering},
+  author={Liu, Parker and Li, Chenxin and Li, Zhengxin and Wu, Yipeng, and Li, Wuyang and Yang, Zhiqin and Zhang, Zhenyuan and Lin, Yunlong and Han, Sirui and Feng, Brandon},
+  journal={arXiv preprint},
+  year={2025}
+}
+```
