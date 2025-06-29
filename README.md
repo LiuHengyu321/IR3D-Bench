@@ -2,7 +2,7 @@
   IR3D-Bench: Evaluating Vision-Language Model Scene Understanding as Agentic Inverse Rendering
 </h1>
 
-*"What I cannot create, I do not understand."*  <div align="right">*——Richard Feynman*</div>
+*"What I cannot create, I do not understand."*  *——Richard Feynman*
 
 <p align="center">
   <a href=""><img src="https://img.shields.io/badge/Arxiv-XXXX.XXXX-B31B1B.svg" alt="Arxiv"></a>
