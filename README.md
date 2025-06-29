@@ -4,11 +4,11 @@
 
 *"What I cannot create, I do not understand."*  <div align="right">*——Richard Feynman*</div>
 
-<hr>
-
-<a href=""><img src="https://img.shields.io/badge/Arxiv-XXXX.XXXX-B31B1B.svg"></a>
-<a href="https://ir3d-bench.github.io/"><img src="https://img.shields.io/badge/Project-Page-orange"></a>
-<a href="https://youtu.be/GRQ9ZjyP5tY"><img src="https://img.shields.io/badge/Video-Youtube-d61c1c.svg"></a>
+<p style="text-align: center;">
+  <a href=""><img src="https://img.shields.io/badge/Arxiv-XXXX.XXXX-B31B1B.svg" alt="Arxiv"></a>
+  <a href="https://ir3d-bench.github.io/"><img src="https://img.shields.io/badge/Project-Page-orange" alt="Project Page"></a>
+  <a href="https://youtu.be/GRQ9ZjyP5tY"><img src="https://img.shields.io/badge/Video-Youtube-d61c1c.svg" alt="Video"></a>
+</p>
 
 <p align="center">
   <img src="assets/IR3D.png" alt="IR3D Logo" width="150"/>
