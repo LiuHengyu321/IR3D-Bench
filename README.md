@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/IR3D.png" alt="IR3D Logo" width="150"/>
+  <img src="assets/IR3D.png" alt="IR3D Logo" width="250"/>
 </p>
 
 > [**IR3D-Bench: Evaluating Vision-Language Model Scene Understanding as Agentic Inverse Rendering**]()<br>
