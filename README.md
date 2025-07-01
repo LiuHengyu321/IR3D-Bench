@@ -27,11 +27,10 @@
 <br> <sup>1</sup>CUHK, <sup>2</sup>TJU, <sup>3</sup>EPFL, <sup>4</sup>HKUST, <sup>5</sup>XMU, <sup>6</sup>MIT
 
 
-# 🌟 Highlight
-- **We propose *IR3D-Bench*, a benchmark that evaluates the spatial and scene understanding capabilities of Vision-Language Models (VLMs) via inverse rendering.**
-- **Our pipeline inputs an image and prompt, guiding the model to predict object-level parameters for reconstructing the scene.**
-- **We introduce a set of metrics to quantitatively assess the fidelity and realism of the reconstructed scenes and images.**
-- **Experiments show that while *Gemini 2.5 Pro* performs best among current VLMs, a notable gap remains from ground truth, which can be reduced through multi-round refinement.**
+# 🌟 Motivation & Findings
+1. Inspired by Richard Feynman's aphorism, we propose a new perspective to evaluate the spatial visual understanding of VLMs through a pretext task: how effectively they can "recreate this scene."
+2. It is found that the goal of scene reconstruction enables VLMs to spontaneously estimate key attributes (such as object ID, localization, color, material, and object relations) in an inverse rendering manner—attributes that are essential for understanding what they perceive.
+3. It reveals surprising potential for mechanisms resembling human reflection: when we input the scenes recreated by VLMs back to them, they demonstrate a thinking process of comparing these recreated scenes with the original images and updating their understanding of the scene (i.e., the predicted key attributes). We anticipate that this multi-round feedback iteration mode will unlock more future possibilities in both understanding and generation.
 
 # 🎨 Pipeline Overview
 <p align="center">
