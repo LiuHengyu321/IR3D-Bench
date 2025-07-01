@@ -5,7 +5,7 @@
 *"What I cannot create, I do not understand."* *——Richard Feynman*
 
 <p align="center">
-  <a href=""><img src="https://img.shields.io/badge/Arxiv-XXXX.XXXX-B31B1B.svg" alt="Arxiv"></a>
+  <a href="https://arxiv.org/abs/2506.23329"><img src="https://img.shields.io/badge/Arxiv-2506.23329-B31B1B.svg" alt="Arxiv"></a>
   <a href="https://ir3d-bench.github.io/"><img src="https://img.shields.io/badge/Project-Page-green" alt="Project Page"></a>
   <a href="https://youtu.be/GRQ9ZjyP5tY"><img src="https://img.shields.io/badge/Video-Youtube-d61c1c.svg" alt="Video"></a>
 </p>
