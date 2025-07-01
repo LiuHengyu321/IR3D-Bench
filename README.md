@@ -30,7 +30,7 @@
 # 🌟 Motivation & Useful Findings
 1. Inspired by Richard Feynman's aphorism (see the header), we propose a new perspective to evaluate VLMs' spatial visual understanding via a pretext task: how well they "recreate this scene."
 2. We found that the aim of scene reconstruction enables VLMs to spontaneously estimate key attributes (object ID, localization, color, material, object relations, etc.) via a inverse rendering fahsion—critical for understanding what they see.
-3. VLMs shows surprising potential for human-like reflection during this "recreation" game: feeding VLMs their recreated scenes, they compare with originals and update their understanding of the secene (the key attributes they estimate). We expect this multi-round feedback iteration to unlock more future possibilities in both understanding and generation.
+3. VLMs shows surprising potential for human-like reflection during this "recreation" game: feeding VLMs their recreated scenes, they compare with originals and update their understanding of the secene (the key attributes they estimate). We expect this multi-round feedback iteration to unlock more possibilities for improving existing VLMs in both understanding and generation performance.
 
 # 🎨 Pipeline Overview
 <p align="center">
