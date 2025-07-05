@@ -93,8 +93,8 @@ If you find our work helpful, please consider citing:
 ```bibtex
 @article{liu2025ir3d,
   title={IR3D-Bench: Evaluating Vision-Language Model Scene Understanding as Agentic Inverse Rendering},
-  author={Liu, Parker and Li, Chenxin and Li, Zhengxin and Wu, Yipeng, and Li, Wuyang and Yang, Zhiqin and Zhang, Zhenyuan and Lin, Yunlong and Han, Sirui and Feng, Brandon},
-  journal={arXiv preprint},
+  author={Liu, Parker and Li, Chenxin and Li, Zhengxin and Wu, Yipeng and Li, Wuyang and Yang, Zhiqin and Zhang, Zhenyuan and Lin, Yunlong and Han, Sirui and Feng, Brandon Y},
+  journal={arXiv preprint arXiv:2506.23329},
   year={2025}
 }
 ```
