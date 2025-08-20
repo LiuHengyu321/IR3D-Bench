@@ -13,7 +13,6 @@ from scipy.optimize import linear_sum_assignment # Import Hungarian algorithm so
 # --- CLIP Setup using specific local path ---
 device = "cuda" if torch.cuda.is_available() else "cpu"
 # Define the specific snapshot path
-# clip_model_path = "/data/zhangzy/clever_proj/hugging_face/transformers/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
 clip_model_path = "openai/clip-vit-base-patch32"
 try:
     # Load tokenizer and model from the specific path
