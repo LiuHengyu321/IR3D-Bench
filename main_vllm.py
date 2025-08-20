@@ -1277,13 +1277,6 @@ def parse_args():
     return parser.parse_args()
 
 def extract_nth_json_object(text: str, n: int = 1) -> Optional[str]:
-    """
-    从生成的文本中提取第 n 个 JSON 对象。
-    
-    :param text: 包含 JSON 对象的文本。
-    :param n: 要提取的 JSON 对象的序号（从 1 开始）。
-    :return: 提取的 JSON 对象的字符串，如果没有找到则返回 None。
-    """
     count = 0
     obj_start = None
     found = 0
@@ -1310,19 +1303,16 @@ def main(args):
 
     modality = args.modality
 
-    # 读取问题内容（所有图片共享相同问题）
     with open('/home/hansirui_3rd/zhangzy/data/Clevr_proj/prompts/vlm_estimate_params.txt', 'r', encoding='utf-8') as file:
         question_content = file.read()
     questions = [question_content]
 
-    # 获取所有图片路径并按数字排序
     image_dir = "/home/hansirui_3rd/zhangzy/data/Clevr_proj/data/clever_data/val/image"
     image_files = sorted(
         glob.glob(os.path.join(image_dir, "CLEVR_val_*.png")),
         key=lambda x: int(re.search(r'(\d+)\.png$', x).group(1))
     )[: 20]
 
-    # 初始化模型请求数据和LLM
     req_data = model_example_map[model](questions, modality)
     engine_args = asdict(req_data.engine_args) | {
         "seed": args.seed,
@@ -1336,7 +1326,6 @@ def main(args):
         
     llm = LLM(**engine_args)
 
-    # 准备采样参数
     sampling_params = SamplingParams(
         temperature=0.2,
         max_tokens=32768,
@@ -1345,9 +1334,7 @@ def main(args):
 
     output_all = f"/home/hansirui_3rd/zhangzy/data/Clevr_proj/output/output_hy/{model}_test"
     
-    # 循环处理每张图片
     for image_path in image_files:
-        # 提取图片编号
         base_name = os.path.basename(image_path)
         match = re.match(r'CLEVR_val_(\d+)\.png', base_name)
         if not match:
@@ -1355,23 +1342,19 @@ def main(args):
             continue
         image_number = match.group(1)
 
-        # 加载图片
         image = Image.open(image_path).convert("RGB")
 
-        # 构建输入（使用模型的prompt格式）
         inputs = [{
             "prompt": req_data.prompts[0],
             "multi_modal_data": {modality: image}
         }]
 
-        # 生成输出
         outputs = llm.generate(
             inputs,
             sampling_params=sampling_params,
             lora_request=req_data.lora_requests
         )
 
-        # 处理并保存结果
         output_folder = f"/{output_all}/json"
         os.makedirs(output_folder, exist_ok=True)
         
