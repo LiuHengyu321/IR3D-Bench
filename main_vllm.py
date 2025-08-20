@@ -1107,34 +1107,34 @@ model_example_map = {
     "gemma3": run_gemma3,
     "glm4v": run_glm4v,
     "h2ovl_chat": run_h2ovl,
-    "idefics3": run_idefics3, # yes
-    "internvl_chat": run_internvl, # internVL3-38B no
+    "idefics3": run_idefics3, 
+    "internvl_chat": run_internvl,
     "kimi_vl": run_kimi_vl,
     "llava": run_llava,
     "llava-next": run_llava_next,
-    "llava-next-video": run_llava_next_video, # yes
-    "llava-onevision": run_llava_onevision, # yes
+    "llava-next-video": run_llava_next_video, 
+    "llava-onevision": run_llava_onevision,
     "mantis": run_mantis,
     "minicpmo": run_minicpmo,
     "minicpmv": run_minicpmv,
-    "mistral3": run_mistral3, # yes
-    "mllama": run_mllama, # yes
+    "mistral3": run_mistral3, 
+    "mllama": run_mllama,
     "llama4": run_llama4,
     "molmo": run_molmo,
     "NVLM_D": run_nvlm_d,
     "ovis2": run_ovis2,
     "paligemma": run_paligemma,
     "paligemma2": run_paligemma2,
-    "phi3_v": run_phi3v, # yes
-    "phi4_mm": run_phi4mm, # yes
-    "pixtral_hf": run_pixtral_hf, # yes
+    "phi3_v": run_phi3v, 
+    "phi4_mm": run_phi4mm,
+    "pixtral_hf": run_pixtral_hf, 
     "qwen_vl": run_qwen_vl,
     "qwen2_vl": run_qwen2_vl,
-    "qwen2_5_vl_7b": run_qwen2_5_vl_7B, # yes 
-    "qwen2_5_vl_72b": run_qwen2_5_vl_72B, # yes run_qwen2_5_vl_72B
+    "qwen2_5_vl_7b": run_qwen2_5_vl_7B, 
+    "qwen2_5_vl_72b": run_qwen2_5_vl_72B, 
     "qwen2_5_omni": run_qwen2_5_omni,
-    "skywork_chat": run_skyworkr1v, # yes
-    "smolvlm": run_smolvlm, # yes
+    "skywork_chat": run_skyworkr1v, 
+    "smolvlm": run_smolvlm, 
 }
 
 
@@ -1147,7 +1147,7 @@ def get_multi_modal_input(args):
     """
     if args.modality == "image":
         # Input image and question
-        image_path = "/home/hansirui_3rd/zhangzy/data/Clevr_proj/data/ten_case/image/CLEVR_val_000000.png"
+        image_path = "CLEVR_val_000000.png"
 
         image = Image.open(image_path).convert("RGB")
         # img_questions = [
@@ -1157,7 +1157,7 @@ def get_multi_modal_input(args):
         #     "Where is this image taken?",
         # ]
         
-        with open('/home/hansirui_3rd/zhangzy/data/Clevr_proj/prompts/vlm_estimate_params.txt', 'r', encoding='utf-8') as file:
+        with open('./prompts/vlm_estimate_params.txt', 'r', encoding='utf-8') as file:
             content = file.read()
 
         return {
@@ -1332,7 +1332,7 @@ def main(args):
         stop_token_ids=req_data.stop_token_ids
     )
 
-    output_all = f"/home/hansirui_3rd/zhangzy/data/Clevr_proj/output/output_hy/{model}_test"
+    output_all = "/path/to/output"
     
     for image_path in image_files:
         base_name = os.path.basename(image_path)
@@ -1376,8 +1376,8 @@ def main(args):
             else:
                 print(f"No JSON found ({image_number})")
 
-    blender_path = "/home/hansirui_3rd/zhangzy/data/Clevr_proj/blender/blender-4.4.0-linux-x64/blender"
-    script_path = "/home/hansirui_3rd/zhangzy/data/Clevr_proj/code/pipeline_hy/main_recon.py"
+    blender_path = "/path/to/blender"
+    script_path = "/path/to/main_recon.py"
     pred_json_dir = output_all + "/json"
     render_dir = output_all + "/render"
     
