@@ -9,8 +9,6 @@ import argparse
 from tqdm import tqdm
 
 # Set OpenAI's API key and API base to use vLLM's API server.
-# 设置 OpenAI 的 API 密钥和 API 基础 URL 以使用 vLLM 的 API 服务器。
-# pip install peft diffusers scipy numpy imageio[ffmpeg] opencv-python Pillow open3d  gradio omegaconf
 def encode_image(image: Image.Image) -> str:
     buffered = BytesIO()
     image.save(buffered, format="JPEG")
