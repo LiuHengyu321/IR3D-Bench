@@ -159,35 +159,23 @@ def evaluate_spatial_relations(pred_objects, gt_relations):
 
 
 def calculate_iou(mask1, mask2):
-    """
-    计算两个 mask 的 IOU.
-    
-    参数：
-      mask1: numpy 数组，形状为 (1, 320, 480) 或 (320, 480)
-      mask2: numpy 数组，形状为 (1, 320, 480) 或 (320, 480)
-      
-    返回：
-      iou: 两个 mask 的交并比（Intersection over Union）
-    """
-    # 如果 mask 带有多余的维度，则去掉该维度
+
     if mask1.ndim == 3 and mask1.shape[0] == 1:
         mask1 = np.squeeze(mask1, axis=0)
     if mask2.ndim == 3 and mask2.shape[0] == 1:
         mask2 = np.squeeze(mask2, axis=0)
     
-    # 如果 mask 不是 bool 类型，则进行阈值判断（假设大于 0 为 True）
     if mask1.dtype != bool:
         mask1 = mask1 > 0
     if mask2.dtype != bool:
         mask2 = mask2 > 0
-    
-    # 计算交集和并集
+
     intersection = np.logical_and(mask1, mask2).sum()
     union = np.logical_or(mask1, mask2).sum()
     
-    # 若并集为 0，则避免除 0 错误，返回 1 或 0 可根据需求设置
+
     if union == 0:
-        return 1.0  # 两个 mask 均为空，认为重合度为1（或根据需求修改为0）
+        return 1.0 
     
     iou = intersection / union
     return iou
