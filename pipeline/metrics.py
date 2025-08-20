@@ -22,7 +22,6 @@ from eval_utils import evaluate_spatial_rule_sets
 # Device setup
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# clip_model_path = "/data/zhangzy/clever_proj/hugging_face/transformers/models--openai--clip-vit-base-patch32/snapshots/3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
 clip_model_path = "openai/clip-vit-base-patch32"
 clip_tokenizer = CLIPTokenizer.from_pretrained(clip_model_path)
 clip_model = CLIPModel.from_pretrained(clip_model_path).to(device)
@@ -123,18 +122,10 @@ def get_mask(image, point):
 
 
 def save_mask(img_array, output_filename):
-    """
-    保存图片到指定路径。
-    
-    参数：
-      img_array: 输入的图像数组，可以是形状为 (1, H, W)、(H, W) 或 (H, W, channels) 的 numpy 数组。
-      output_filename: 保存图片的路径和文件名。
-    """
-    # 如果图像数组形状为 (1, H, W) 则去除多余的维度
+
     if img_array.ndim == 3 and img_array.shape[0] == 1:
         img_array = np.squeeze(img_array, axis=0)
 
-    # 保存图片
     cv2.imwrite(output_filename, img_array)
 
 def mask_to_bbox(mask):
