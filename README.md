@@ -25,6 +25,7 @@
 [Sirui Han](https://facultyprofiles.hkust.edu.hk/profiles.php?profile=sirui-han-siruihan)<sup>4</sup>,
 [Brandon Y. Feng](https://brandonyfeng.github.io/)<sup>6</sup>,
 <br> <sup>1</sup>CUHK, <sup>2</sup>TJU, <sup>3</sup>EPFL, <sup>4</sup>HKUST, <sup>5</sup>XMU, <sup>6</sup>MIT
+> NeurIPS DB 2025
 
 
 # 🌟 Motivation & Useful Findings
