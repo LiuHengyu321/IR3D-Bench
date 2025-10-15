@@ -1303,11 +1303,11 @@ def main(args):
 
     modality = args.modality
 
-    with open('/home/hansirui_3rd/zhangzy/data/Clevr_proj/prompts/vlm_estimate_params.txt', 'r', encoding='utf-8') as file:
+    with open('prompts/vlm_estimate_params.txt', 'r', encoding='utf-8') as file:
         question_content = file.read()
     questions = [question_content]
 
-    image_dir = "/home/hansirui_3rd/zhangzy/data/Clevr_proj/data/clever_data/val/image"
+    image_dir = "/data/clever_data/val/image"
     image_files = sorted(
         glob.glob(os.path.join(image_dir, "CLEVR_val_*.png")),
         key=lambda x: int(re.search(r'(\d+)\.png$', x).group(1))
