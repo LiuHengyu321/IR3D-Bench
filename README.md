@@ -46,7 +46,11 @@ conda create --name ir3d python=3.10
 conda activate ir3d
 ```
 
-(2) First install [vllm](https://github.com/vllm-project/vllm)
+(2) Install the common inference and evaluation dependencies:
+```shell
+pip install -r requirements.txt
+```
+For local open-weight inference, also install [vLLM](https://github.com/vllm-project/vllm) in a compatible CUDA environment:
 ```
 pip install vllm
 ```
@@ -55,35 +59,55 @@ pip install vllm
 ```shell
 snap install blender --classic
 ```
-(4) Install [SAM](https://github.com/facebookresearch/segment-anything)
+(4) Download the **ViT-H** checkpoint linked in the [SAM model checkpoints](https://github.com/facebookresearch/segment-anything#model-checkpoints) section, then configure its local path:
 ```shell
-pip install git+https://github.com/facebookresearch/segment-anything.git
+export SAM_CHECKPOINT="/absolute/path/to/sam_vit_h_4b8939.pth"
 ```
+`requirements.txt` lists direct dependencies, not a tested version lock. The original exact package/CUDA/Blender versions have not been recorded here; installing these packages alone does not establish full reproducibility. Record the versions from a validated environment before publishing a lock file. The vLLM entry point uses version-sensitive vLLM APIs.
+
+Use `OPENAI_API_KEY` for API credentials. `OPENAI_BASE_URL` optionally selects an OpenAI-compatible endpoint (default: `https://api.openai.com/v1`). Choose an endpoint that supports the requested model. For gated Hugging Face models, set `HF_TOKEN` or authenticate with the Hugging Face CLI; no token is embedded in the code.
 
 # 📚 Dataset setup
 Download our processed data: [IR3D-bench-data](https://huggingface.co/datasets/Piang/IR3D-bench).
+The evaluation data root must contain `image/` and `json/` with matching CLEVR case names. Run the following examples from the repository root.
 
 ## Inverse Rendering
 ### Task prompt
 Prompt for inverse rendering and gpt4o score is in `prompts/gpt4o_as_evaluator.txt` and `prompts/vlm_estimate_params.txt`
-### Latest Proprietary Models
-Modified the `model-name` as defined in `main_vllm.py` to use the required model.
+### Open-source Models (local vLLM)
+Choose a supported `--model-type` from `main_vllm.py --help`. All matching `CLEVR_val_*.png` images are processed by default; use `--max-images 1` for a single-scene run.
 ```shell
-python main_vllm.py --model-type "model-name"
+python main_vllm.py --model-type "qwen2_5_vl_7b" \
+    --image-dir /path/to/data/image \
+    --output-dir ./outputs \
+    --max-images 1
 ```
-### Open-source Models
-Modified the `model-name` as you needed, such as "gpt-4o", "grok-3", etc.
+The output root contains `json/` and `render/`. Blender is resolved from `PATH`; override it with `--blender-path` or `BLENDER_PATH`. The default prompt and rendering script are resolved relative to the repository, not the caller's working directory.
+
+### Proprietary Models (OpenAI-compatible API)
+Set `OPENAI_API_KEY` in your environment before running. For a small trial, point `--image_dir` at a directory containing only the intended sample images. All supported images in that directory are considered; existing result JSON files are skipped.
 ```shell
-python main_api.py \ 
-    --image_dir /path/to/images \ 
-    --result_dir /output/path \ 
-    --prompt_path prompts/vlm_estimate_params.txt \ 
-    --model_name "model-name"
+python main_api.py \
+    --image_dir /path/to/data/image \
+    --result_dir ./outputs/json \
+    --prompt_path prompts/vlm_estimate_params.txt \
+    --model_name "gpt-4o"
 ```
 ## Eval
+With `SAM_CHECKPOINT` and `OPENAI_API_KEY` configured:
 ```shell
-bash cal_metric.sh "/output/path" "/path/to/images" "GPI_ID"
+bash cal_metric.sh "./outputs" "/path/to/data" "0"
 ```
+Pass the data **root**, not its `image/` subdirectory. The script matches scenes, renders predictions, and computes metrics; it stops if a stage exits unsuccessfully. Relative paths are resolved from the caller's working directory. Optional environment variables: `PYTHON_BIN`, `BLENDER_PATH`, `LLM_MODEL_NAME` (default `gpt-4o`), and `OPENAI_BASE_URL`. LLM scoring calls the configured API and may incur charges.
+
+## Local regression checks
+```shell
+python -m unittest discover -s tests -v
+```
+These checks use stubs and do not download models, call an API, or establish numerical benchmark reproducibility.
+
+## License status
+No repository-wide license has been declared yet. Existing per-file license notices remain in effect; do not infer a repository-wide reuse grant from public availability. A repository-wide license requires confirmation from the rights holders.
 
 
 # 🎈 Acknowledgement

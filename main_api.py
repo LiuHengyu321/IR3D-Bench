@@ -37,11 +37,14 @@ def main():
     parser.add_argument('--result_dir', type=str, required=True, help="Directory to save JSON results.")
     parser.add_argument('--prompt_path', type=str, required=True, help="Path to the text file containing the prompt.")
     parser.add_argument('--model_name', type=str, default="gemini-2.5-pro-exp-03-25", help="Name of the model to use.")
+    parser.add_argument('--openai_api_base', default=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"))
 
     args = parser.parse_args()
 
-    openai_api_key = "your-openai-key-here"  # Hardcoded API key
-    openai_api_base = "Openai_Website"  # Hardcoded API base URL
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    if not openai_api_key:
+        parser.error("Set OPENAI_API_KEY before running inference.")
+    openai_api_base = args.openai_api_base
     model_name = args.model_name
     image_dir = args.image_dir
     result_dir = args.result_dir
@@ -73,8 +76,7 @@ def main():
         print(f"No images found in {image_dir}")
         return
 
-    # image_files = sorted(image_files)[5: 200]
-    image_files = sorted(image_files)[800: 1500]
+    image_files = sorted(image_files)
     for image_file_path in tqdm(image_files, desc="Processing images"):
         image_name = os.path.splitext(os.path.basename(image_file_path))[0]
         result_file_path = os.path.join(result_dir, f"{image_name}.json")

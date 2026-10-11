@@ -1,0 +1,11 @@
+# Direct dependencies; this is not a validated version lock.
+openai
+Pillow
+tqdm
+numpy
+scipy
+opencv-python
+torch
+transformers
+huggingface-hub
+segment-anything

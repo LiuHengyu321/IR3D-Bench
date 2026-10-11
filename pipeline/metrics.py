@@ -23,14 +23,6 @@ from eval_utils import evaluate_spatial_rule_sets
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 clip_model_path = "openai/clip-vit-base-patch32"
-clip_tokenizer = CLIPTokenizer.from_pretrained(clip_model_path)
-clip_model = CLIPModel.from_pretrained(clip_model_path).to(device)
-clip_model.eval()
-
-sam_checkpoint = "/home/hansirui_3rd/zhangzy/data/Clevr_proj/code/segment-anything/weights/sam_vit_h_4b8939.pth"
-
-sam = sam_model_registry["vit_h"](checkpoint=sam_checkpoint).to(device)
-predictor = SamPredictor(sam)
 
 
 def compute_clip_text_similarity(text1, text2):
@@ -361,6 +353,7 @@ def evaluate_case(case_id, paths, openai_client: OpenAI = None, llm_model_name: 
 
 
 def main():
+    global clip_tokenizer, clip_model, predictor
     parser = argparse.ArgumentParser()
     parser.add_argument("--map_dir", required=True)
     parser.add_argument("--render_dir", required=True)
@@ -368,11 +361,23 @@ def main():
     parser.add_argument("--pred_json_dir", required=True)
     parser.add_argument("--gt_image_dir", required=True)
     parser.add_argument("--output_dir", required=True)
-    parser.add_argument("--openai_api_key", type=str, default=None)
-    parser.add_argument("--openai_api_base", type=str, default="https://api.chatanywhere.tech/v1")
+    parser.add_argument("--openai_api_key", type=str, default=os.getenv("OPENAI_API_KEY"))
+    parser.add_argument("--openai_api_base", type=str, default=os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1"))
     parser.add_argument("--llm_model_name", type=str, default=None)
-    parser.add_argument("--llm_system_prompt_path", type=str, default="/home/hansirui_3rd/zhangzy/data/Clevr_proj/prompts/gpt4o_as_evaluator.txt")
+    parser.add_argument("--llm_system_prompt_path", type=str, default=os.path.join(os.path.dirname(__file__), "..", "prompts", "gpt4o_as_evaluator.txt"))
+    parser.add_argument("--sam_checkpoint", default=os.getenv("SAM_CHECKPOINT"), help="Path to the SAM ViT-H checkpoint, or set SAM_CHECKPOINT.")
     args = parser.parse_args()
+    if not args.sam_checkpoint or not os.path.isfile(args.sam_checkpoint):
+        parser.error("Provide an existing SAM ViT-H checkpoint via --sam_checkpoint or SAM_CHECKPOINT.")
+    if args.llm_model_name and not args.openai_api_key:
+        parser.error("LLM evaluation requires OPENAI_API_KEY or --openai_api_key.")
+
+    # Load weights only after CLI validation, so --help does not download models.
+    clip_tokenizer = CLIPTokenizer.from_pretrained(clip_model_path)
+    clip_model = CLIPModel.from_pretrained(clip_model_path).to(device)
+    clip_model.eval()
+    sam = sam_model_registry["vit_h"](checkpoint=args.sam_checkpoint).to(device)
+    predictor = SamPredictor(sam)
 
     paths = vars(args)
     os.makedirs(paths["output_dir"], exist_ok=True)

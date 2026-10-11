@@ -9,11 +9,6 @@ on HuggingFace model repository.
 import os
 import subprocess
 
-from huggingface_hub import login
-
-login(token="your_hugging_face_token_here")
-
-
 import random
 from contextlib import contextmanager
 from dataclasses import asdict
@@ -1228,6 +1223,11 @@ def parse_args():
     parser = FlexibleArgumentParser(
         description='Demo on using vLLM for offline inference with '
         'vision language models for text generation')
+    parser.add_argument('--image-dir', required=True, help='Directory containing CLEVR_val_*.png images.')
+    parser.add_argument('--output-dir', required=True, help='Output root for json/ and render/.')
+    parser.add_argument('--blender-path', default=os.getenv('BLENDER_PATH', 'blender'))
+    parser.add_argument('--prompt-path', default=os.path.join(os.path.dirname(__file__), 'prompts', 'vlm_estimate_params.txt'))
+    parser.add_argument('--max-images', type=int, default=None, help='Optional positive limit; default processes all images.')
     parser.add_argument('--model-type',
                         '-m',
                         type=str,
@@ -1274,7 +1274,10 @@ def parse_args():
         action='store_true',
         help='If True, then use different prompt (with the same multi-modal '
         'data) for each request.')
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args.max_images is not None and args.max_images < 1:
+        parser.error('--max-images must be positive.')
+    return args
 
 def extract_nth_json_object(text: str, n: int = 1) -> Optional[str]:
     count = 0
@@ -1303,15 +1306,17 @@ def main(args):
 
     modality = args.modality
 
-    with open('prompts/vlm_estimate_params.txt', 'r', encoding='utf-8') as file:
+    with open(args.prompt_path, 'r', encoding='utf-8') as file:
         question_content = file.read()
     questions = [question_content]
 
-    image_dir = "/data/clever_data/val/image"
+    image_dir = args.image_dir
     image_files = sorted(
         glob.glob(os.path.join(image_dir, "CLEVR_val_*.png")),
         key=lambda x: int(re.search(r'(\d+)\.png$', x).group(1))
-    )[: 20]
+    )[:args.max_images]
+    if not image_files:
+        raise ValueError(f"No CLEVR_val_*.png images found in {image_dir}")
 
     req_data = model_example_map[model](questions, modality)
     engine_args = asdict(req_data.engine_args) | {
@@ -1332,7 +1337,7 @@ def main(args):
         stop_token_ids=req_data.stop_token_ids
     )
 
-    output_all = "/path/to/output"
+    output_all = args.output_dir
     
     for image_path in image_files:
         base_name = os.path.basename(image_path)
@@ -1355,7 +1360,7 @@ def main(args):
             lora_request=req_data.lora_requests
         )
 
-        output_folder = f"/{output_all}/json"
+        output_folder = os.path.join(output_all, "json")
         os.makedirs(output_folder, exist_ok=True)
         
         for output in outputs:
@@ -1376,8 +1381,8 @@ def main(args):
             else:
                 print(f"No JSON found ({image_number})")
 
-    blender_path = "/path/to/blender"
-    script_path = "/path/to/main_recon.py"
+    blender_path = args.blender_path
+    script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pipeline", "recon.py")
     pred_json_dir = output_all + "/json"
     render_dir = output_all + "/render"
     
