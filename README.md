@@ -40,34 +40,37 @@
 
 ## Understanding by Creating
 
-**IR3D-Bench · [29 June 2025](https://arxiv.org/abs/2506.23329v1).** Test visual scene understanding through reconstruction; measure geometry, spatial relations and appearance.
+**Our work: IR3D-Bench.** We test scene understanding through reconstruction and measure geometry, spatial relations and appearance.
 
 **Image → Scene parameters → Render & compare**
 
-### Related Work
+[Paper · 29 June 2025](https://arxiv.org/abs/2506.23329v1) · [Cite IR3D-Bench](#citation)
 
-Related questions, different tasks. Dates: arXiv v1. Click a preview to visit the project.
+## Selected Related Research
+
+These papers explore related questions across scene reconstruction, procedural generation, and physical reasoning. Each project is credited to its original authors.
+
+Inclusion in this reading list does not imply collaboration, endorsement, direct influence, or priority. Dates refer to the first arXiv submission.
 
 <table>
 <tr>
-<td width="50%" valign="top"><a href="https://ir3d-bench.github.io/"><img src="assets/related/ir3d.webp" width="360" alt="IR3D-Bench project preview"></a><br><strong>Our work: <a href="https://ir3d-bench.github.io/">IR3D-Bench</a></strong><br>2025-06-29 · <a href="https://arxiv.org/abs/2506.23329v1">Paper</a><br>Image into a measurable 3D scene.</td>
-<td width="50%" valign="top"><a href="https://fugtemypt123.github.io/VIGA-website/"><img src="assets/related/viga.webp" width="360" alt="VIGA / BlenderBench project preview"></a><br><strong><a href="https://fugtemypt123.github.io/VIGA-website/">VIGA / BlenderBench</a></strong><br>2026-01-16 · <a href="https://arxiv.org/abs/2601.11109">Paper</a><br>Visual feedback for 3D editing.</td>
+<td width="50%" valign="top"><a href="https://fugtemypt123.github.io/VIGA-website/"><img src="assets/related/viga.webp" width="360" alt="VIGA / BlenderBench project preview"></a><br><strong><a href="https://fugtemypt123.github.io/VIGA-website/">VIGA / BlenderBench</a></strong><br>Shaofeng Yin et al.<br>2026-01-16 · <a href="https://arxiv.org/abs/2601.11109">Paper</a><br>Visual feedback for 3D editing.</td>
+<td width="50%" valign="top"><a href="https://tiger-ai-lab.github.io/VisPhyWorld/"><img src="assets/related/visphyworld.webp" width="360" alt="VisPhyWorld / VisPhyBench project preview"></a><br><strong><a href="https://tiger-ai-lab.github.io/VisPhyWorld/">VisPhyWorld / VisPhyBench</a></strong><br>Jiarong Liang et al.<br>2026-02-09 · <a href="https://arxiv.org/abs/2602.13294">Paper</a><br>Physics videos into simulator code.</td>
 </tr>
 <tr>
-<td width="50%" valign="top"><a href="https://tiger-ai-lab.github.io/VisPhyWorld/"><img src="assets/related/visphyworld.webp" width="360" alt="VisPhyWorld / VisPhyBench project preview"></a><br><strong><a href="https://tiger-ai-lab.github.io/VisPhyWorld/">VisPhyWorld / VisPhyBench</a></strong><br>2026-02-09 · <a href="https://arxiv.org/abs/2602.13294">Paper</a><br>Physics videos into simulator code.</td>
-<td width="50%" valign="top"><a href="https://aigeeksgroup.github.io/Code2Worlds/"><img src="assets/related/code2worlds.webp" width="360" alt="Code2Worlds / Code4D project preview"></a><br><strong><a href="https://aigeeksgroup.github.io/Code2Worlds/">Code2Worlds / Code4D</a></strong><br>2026-02-12 · <a href="https://arxiv.org/abs/2602.11757">Paper</a><br>Text into dynamic 4D scenes.</td>
+<td width="50%" valign="top"><a href="https://aigeeksgroup.github.io/Code2Worlds/"><img src="assets/related/code2worlds.webp" width="360" alt="Code2Worlds / Code4D project preview"></a><br><strong><a href="https://aigeeksgroup.github.io/Code2Worlds/">Code2Worlds / Code4D</a></strong><br>Yi Zhang et al.<br>2026-02-12 · <a href="https://arxiv.org/abs/2602.11757">Paper</a><br>Text into dynamic 4D scenes.</td>
+<td width="50%" valign="top"><a href="https://sealical.github.io/physcodebench/"><img src="assets/related/physcodebench.webp" width="360" alt="PhysCodeBench project preview"></a><br><strong><a href="https://sealical.github.io/physcodebench/">PhysCodeBench</a></strong><br>Tianyidan Xie et al.<br>2026-04-26 · <a href="https://arxiv.org/abs/2604.23580">Paper</a><br>Text into physics simulation code.</td>
 </tr>
 <tr>
-<td width="50%" valign="top"><a href="https://sealical.github.io/physcodebench/"><img src="assets/related/physcodebench.webp" width="360" alt="PhysCodeBench project preview"></a><br><strong><a href="https://sealical.github.io/physcodebench/">PhysCodeBench</a></strong><br>2026-04-26 · <a href="https://arxiv.org/abs/2604.23580">Paper</a><br>Text into physics simulation code.</td>
-<td width="50%" valign="top"><a href="https://www.3dcodebench.com/"><img src="assets/related/3dcodebench.webp" width="360" alt="3DCodeBench project preview"></a><br><strong><a href="https://www.3dcodebench.com/">3DCodeBench</a></strong><br>2026-05-31 · <a href="https://arxiv.org/abs/2606.01057">Paper</a><br>Text / image into procedural 3D assets.</td>
+<td width="50%" valign="top"><a href="https://www.3dcodebench.com/"><img src="assets/related/3dcodebench.webp" width="360" alt="3DCodeBench project preview"></a><br><strong><a href="https://www.3dcodebench.com/">3DCodeBench</a></strong><br>Yipeng Gao et al.<br>2026-05-31 · <a href="https://arxiv.org/abs/2606.01057">Paper</a><br>Text / image into procedural 3D assets.</td>
+<td width="50%" valign="top"><a href="https://mirros-lab.github.io/code-as-world/"><img src="assets/related/code-as-worlds.webp" width="360" alt="Code as Worlds project preview"></a><br><strong><a href="https://mirros-lab.github.io/code-as-world/">Code as Worlds</a></strong><br>Hanyang Wang et al.<br>2026-08-27 · <a href="https://arxiv.org/abs/2608.27549">Paper</a><br>Executable worlds for physical reasoning.</td>
 </tr>
 <tr>
-<td width="50%" valign="top"><a href="https://mirros-lab.github.io/code-as-world/"><img src="assets/related/code-as-worlds.webp" width="360" alt="Code as Worlds project preview"></a><br><strong><a href="https://mirros-lab.github.io/code-as-world/">Code as Worlds</a></strong><br>2026-08-27 · <a href="https://arxiv.org/abs/2608.27549">Paper</a><br>Executable worlds for physical reasoning.</td>
-<td width="50%" valign="top"><a href="https://4dcodebench.com/"><img src="assets/related/4dcodebench.webp" width="360" alt="4DCodeBench project preview"></a><br><strong><a href="https://4dcodebench.com/">4DCodeBench</a></strong><br>2026-10-02 · <a href="https://arxiv.org/abs/2610.03715">Paper</a><br>Video into 4D graphics programs.</td>
+<td width="50%" valign="top"><a href="https://4dcodebench.com/"><img src="assets/related/4dcodebench.webp" width="360" alt="4DCodeBench project preview"></a><br><strong><a href="https://4dcodebench.com/">4DCodeBench</a></strong><br>Ruihong Shen et al.<br>2026-10-02 · <a href="https://arxiv.org/abs/2610.03715">Paper</a><br>Video into 4D graphics programs.</td>
 </tr>
 </table>
 
-Preview images credit their respective authors. [Image sources](assets/related/SOURCES.md) · [Cite IR3D-Bench](#citation)
+Preview images are from the linked project pages; credit remains with their respective authors. [Image sources](assets/related/SOURCES.md)
 
 
 # 🛠️ Environment setup
